@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container_1">
     <div>
       <!-- <logo /> -->
       <h1 class="title">
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style>
-.container {
+.container_1 {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;

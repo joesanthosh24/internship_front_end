@@ -39,42 +39,48 @@
         background-color: rgba(62, 128, 9, 0.795);
     }
 
-    .list_column {
-        float: left;
-        width: 25%;
-        padding: 0 10px;
-        margin-top: 15px;
-        height: 700px;
+    .list_row {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    /* .list_row {margin: 0 -5px;} */
+    .list_column {
+        width: 335px;
+        padding: 0 10px;
+        margin-top: 15px;
+        height: 500px;
+    }
 
-    .list_row:after {
+    /* .list_row:after {
         content: "";
         display: table;
         clear: both;
-    }
+    } */
 
     .book_content {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         padding: 16px;
-        text-align: center;
+        /* text-align: center; */
         background-color: rgb(214, 166, 233);
         color: red;
-        overflow: hidden;
+        /* overflow: hidden; */
+        margin-top: 8px;
+        height: 100%;
     }
 
-    .short {
+    /* .short {
         height: 450px;
     }
 
     .short {
         margin-bottom: 5px;
-    }
+    } */
 
-    .book_content img {
+    .book_content > img {
         width: 100%;
-        height: 400px;
+        height: 200px;
     }
 
     @media screen and (max-width: 600px) {
