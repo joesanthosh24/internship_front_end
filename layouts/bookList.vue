@@ -10,9 +10,8 @@
     nav ul li {
         list-style-type: none;
         display: inline-block;
-        padding: 2px;
+        padding-top: 3px;
         margin-bottom: 3px;
-        margin-top: 3px;
         margin-right: 20px;
         color: darkblue;
         font-weight: bold;
@@ -43,12 +42,11 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        justify-content: space-between;
     }
 
     .list_column {
         width: 335px;
-        padding: 0 10px;
+        padding: 5px 10px;
         margin-top: 15px;
         height: 500px;
     }
@@ -67,7 +65,7 @@
         color: red;
         /* overflow: hidden; */
         margin-top: 8px;
-        height: 100%;
+        height: 90%;
     }
 
     /* .short {

@@ -16,7 +16,7 @@
             <!-- </div> -->
             <div class="book_link">
                 <nuxt-link to="/books">
-                    <a class="button green" @click="addBook">Add</a>
+                    <button type="submit" class="button green" @click="addBook">Add</button>
                 </nuxt-link>
             </div>
         </form>
@@ -24,34 +24,43 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+    import { mapMutations } from 'vuex';
+    import ApiService from '../apiService';
 
-export default {
-    data() {
-        return {
-            title: '',
-            genre: '',
-            rating: '',
-            image_url: ''
-        }
-    },
-    methods: {
-        addBook() {
-            if(this.title && this.genre && this.rating && this.image_url) {
-                this.$store.commit('add', {
-                    id: this.$store.state.count + 1,
-                    title: this.title,
-                    genre: this.genre,
-                    rating: this.rating,
-                    hover: false, 
-                    mainDisplay: true, 
-                    show: true,
-                    img_src: this.image_url
+    const apiService = new ApiService();
+
+    export default {
+        data() {
+            return {
+                title: '',
+                genre: '',
+                rating: '',
+                image_url: ''
+            }
+        },
+        methods: {
+            async addBook(event) {
+                // Adding Book to MongoDB Database
+                
+                await apiService.createBook(
+                    { 
+                        title: this.title, 
+                        genre: this.genre, 
+                        rating: this.rating, 
+                        img_src: this.image_url,
+                        hover: false,
+                        mainDisplay: true,
+                        show: true,
+                    }
+                ).then(res => {
+                    console.log(res);
                 });
+            },
+            async getBook(title){
+                return await apiService.getBookByTitle(title)
             }
         }
     }
-}
 </script>
 
 <style>
@@ -61,14 +70,14 @@ export default {
         font-size: 22px;
     }
 
-    div.container {
+    /* div.container {
         justify-content: center;
         align-items: center;
         text-align: center;
         display: grid;
         border: 1px solid rgb(12, 87, 68);
         margin: 100px 200px;
-    }
+    } */
 
     .book_input {
         margin-left: 15px;

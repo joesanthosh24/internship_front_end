@@ -2,13 +2,13 @@
     <div>
         <nav>
             <ul>
-                <nuxt-link to="/">
-                    <li>
+                <li>
+                    <nuxt-link to="/">
                         <button class="main button green">
                             Home
                         </button>
-                    </li>
-                </nuxt-link>
+                    </nuxt-link>
+                </li>
                 <nuxt-link to="/contact">
                     <li>
                         <button class="main button red">
@@ -45,7 +45,7 @@
             </button>
         </router-link>
         <div class="list_row">
-            <book-content v-for="book in books" :key="book.id" :book="book"></book-content>
+            <book-content v-for="book in filteredBooks" :key="book.title" :book="book"></book-content>
         </div>
     </div>
 </template>
@@ -53,11 +53,15 @@
 <script>
     import BookContent from '~/components/BookContent'
     import { mapMutations } from 'vuex';
+    import ApiService from '../apiService';
+
+    let apiService = new ApiService();
 
     export default {
         layout: 'book-list',
         data() {
             return {
+                filteredBooks: this.$store.state.books,
                 selectedGenre: '',
                 genres: [
                     {name: 'Mystery', genre: 'Mystery'}, 
@@ -84,8 +88,22 @@
         },
         computed: {
             books() {
-                return this.$store.state.books
+                return this.$store.state.books;
             }
+        },
+        async created() {
+            let books = await apiService.getBooks();
+
+            books.forEach(book => {
+                this.$store.commit('add', book);
+            })
+        },
+        async destroyed() {
+            let books = await apiService.getBooks();
+
+            books.forEach(book => {
+                this.$store.commit('delete', book);
+            });
         }
     };
 </script>

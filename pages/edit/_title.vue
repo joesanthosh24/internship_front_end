@@ -1,18 +1,18 @@
 <template>
     <div class="container">
-        <form id="form">
+        <form id="form_2">
             <!-- <div> -->
-                <label for="title_2">Title</label>
+                <!-- <label for="title_2">Title</label>
                 <input class="book_input" type="text" id="title_2" :value="book.title">
                 <hr>
                 <label for="genre_2">Genre</label>
                 <input class="book_input" type="text" id="genre_2" :value="book.genre">
-                <hr>
+                <hr> -->
                 <label for="rating_2">Rating</label>
                 <input type="text" class="book_input" id="rating_2" :value="book.rating">
-                <hr>
+                <!-- <hr>
                 <label for="image_2">Image Source</label>
-                <input type="text" class="book_input" id="image_2" :value="book.img_src">
+                <input type="text" class="book_input" id="image_2" :value="book.img_src"> -->
             <!-- </div> -->
             <div class="book_link">
                 <nuxt-link to="/books">
@@ -24,50 +24,68 @@
 </template>
 
 <script>
+import ApiService from '../../apiService';
+
+const apiService = new ApiService();
+
 export default {
     data() {
         return {
-            id: this.$route.params.id,
             book: {}
         };
     },
-    created() {
-        for(let i=0; i<this.$store.state.books.length; i++) {
-            if(this.$store.state.books[i].id == this.id) {
-                this.book = this.$store.state.books[i];
-                break;
-            }
-        }
+    async created() {
+        // let promisedObj = await apiService.getBookByTitle(this.$route.params.id);
+
+        // this.book = promisedObj[0];
+
+        // this.book = this.$store.commit('getBookByTitle', this.$route.params.title);
+        let books = await apiService.getBookByTitle(this.$route.params.title);
+        this.book = books[0];
+        console.log(this.book);
+
+        this.$store.commit('add', this.book);
+    },
+    destroyed() {
+        this.$store.commit('delete', this.book);
     },
     methods: {
-        editBook() {
-            let titleVal = document.getElementById('title_2').value;
-            let genreVal = document.getElementById('genre_2').value;
-            let ratingVal = document.getElementById('rating_2').value;
-            let imgSrcVal = document.getElementById('image_2').value;
+        async editBook() {
+            // let titleVal = document.getElementById('title_2').value;
+            // let genreVal = document.getElementById('genre_2').value;
+            // let ratingVal = document.getElementById('rating_2').value;
+            // let imgSrcVal = document.getElementById('image_2').value;
 
-            this.$store.commit('edit', {
-                    book: this.book,
-                    title: titleVal,
-                    genre: genreVal,
-                    rating: ratingVal,
-                    img_src: imgSrcVal
-                }
-            );
+            let ratingVal = document.getElementById('rating_2').value;
+
+            console.log(ratingVal);
+
+            console.log(this.book.title);
+
+            this.book = await apiService.updateBook({
+                title: this.book.title,
+                genre: this.book.genre,
+                rating: Number.parseFloat(ratingVal),
+                img_src: this.book.img_src,
+                _id: this.book._id,
+                hover: false,
+                mainDisplay: true,
+                show: true
+            });
         }
     }
 }
 </script>
 
 <style>
-    div.container {
+    /* div.container {
         justify-content: center;
         align-items: center;
         text-align: center;
         display: grid;
         border: 1px solid rgb(12, 87, 68);
         margin: 100px 200px;
-    }
+    } */
 
     .book_input {
         margin-top: 10px;
