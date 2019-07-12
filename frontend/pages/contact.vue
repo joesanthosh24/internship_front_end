@@ -18,7 +18,7 @@
                     Home
                 </div>
             </nuxt-link>
-            <nuxt-link to="/books">
+            <nuxt-link v-if="this.$store.state.currentUser._id" to="/books">
                 <div class="button grey" id="books">
                     Books
                 </div>

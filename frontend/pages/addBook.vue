@@ -44,13 +44,15 @@
                 
                 await apiService.createBook(
                     { 
-                        title: this.title, 
-                        genre: this.genre, 
-                        rating: this.rating, 
-                        img_src: this.image_url,
-                        hover: false,
-                        mainDisplay: true,
-                        show: true,
+                        bookInfo: {
+                            title: this.title,
+                            genre: this.genre,
+                            rating: Number.parseFloat(this.rating),
+                            img_src: this.image_url,
+                            hover: false,
+                            mainDisplay: true,
+                            show: true
+                        }
                     }
                 ).then(res => {
                     console.log(res);

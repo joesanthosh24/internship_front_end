@@ -38,4 +38,24 @@ export default class ApiService {
             console.log(err);
         });
     };
+
+    goToLogin(userInfo) {
+        console.log('Login in Axios');
+        return axios.post(`${API_URL}/users/login`, userInfo)
+        .then(response => response.data)
+        .catch(err => err);
+    };
+
+    goToSignUp(userInfo) {
+        console.log('Sign Up in Axios');
+        return axios.post(`${API_URL}/users/signUp`, userInfo)
+        .then( response => response.data )
+        .catch( err => err );
+    };
+
+    logOutUser(userInfo) {
+        return axios.get(`${API_URL}/users/logOut`, userInfo)
+        .then( response => response.data )
+        .catch( err => err );
+    }
 }

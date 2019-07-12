@@ -1,6 +1,8 @@
 export const state = () => ({
     books: [],
-    count: 0
+    count: 0,
+    userLoggedIn: false,
+    currentUser: {}
 });
 
 export const mutations = {
@@ -82,6 +84,27 @@ export const mutations = {
             if(state.books[i].title == title) {
                 console.log(state.books[i]);
                 return state.books[i];
+            }
+        }
+    },
+    changeLoggedInStatus(state, log) {
+        state.userLoggedIn = log.loggedInValue;
+    },
+    setCurrentUser(state, user) {
+        state.currentUser = user;
+    },
+    addBookToUser(state, book) {
+        if(!state.currentUser.books) {
+            state.currentUser.books = [];
+        }
+
+        state.currentUser.books.push(book);
+    },
+    deleteBookFromUser(state, book) {
+        for(let i=0; i<state.currentUser.books.length; i++) {
+            if(book.title = state.currentUser.books[i].title) {
+                state.currentUser.books.splice(i, 1);
+                return;
             }
         }
     }

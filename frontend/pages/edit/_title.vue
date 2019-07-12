@@ -63,14 +63,8 @@ export default {
             console.log(this.book.title);
 
             this.book = await apiService.updateBook({
-                title: this.book.title,
-                genre: this.book.genre,
                 rating: Number.parseFloat(ratingVal),
-                img_src: this.book.img_src,
-                _id: this.book._id,
-                hover: false,
-                mainDisplay: true,
-                show: true
+                _id: this.book._id
             });
         }
     }

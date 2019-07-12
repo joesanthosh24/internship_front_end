@@ -26,6 +26,9 @@ export default {
     Logo,
     mainLinks: MainLinks
   },
+  created() {
+    console.log(this.$store.state.currentUser);
+  }
 };
 </script>
 

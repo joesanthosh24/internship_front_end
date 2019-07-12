@@ -39,13 +39,13 @@
                 </li>
             </ul>
         </nav>
-        <router-link to="/addBook">
+        <router-link v-if="$store.state.currentUser._id" to="/addBook">
             <button class="button green" style="margin-bottom: 40px; padding: 20px 30px;">
                 Add New Book
             </button>
         </router-link>
         <div class="list_row">
-            <book-content v-for="book in filteredBooks" :key="book.title" :book="book"></book-content>
+            <book-content v-for="book in filteredBooks" :key="book._id" :book="book"></book-content>
         </div>
     </div>
 </template>
@@ -81,6 +81,15 @@
                 else {
                     this.$store.commit('showAll');
                 }
+            },
+            async getBooks() {
+                let books = await apiService.getBooks();
+
+                books.forEach(book => {
+                    this.$store.commit('add', book);
+                });
+
+                console.log(this.$store.state.books);
             }
         },
         components: {
@@ -94,9 +103,13 @@
         async created() {
             let books = await apiService.getBooks();
 
+            console.log(this.$store.state.currentUser._id);
+
             books.forEach(book => {
                 this.$store.commit('add', book);
-            })
+            });
+
+            //console.log(this.$store.state.books);
         },
         async destroyed() {
             let books = await apiService.getBooks();

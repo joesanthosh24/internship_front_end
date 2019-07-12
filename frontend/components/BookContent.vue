@@ -8,14 +8,14 @@
                 Info
             </button>
             <nuxt-link :to="'/edit/' + book.title">
-                <button class="button grey">
+                <button class="button grey" :disabled="!userOn">
                     Change Rating
                 </button>
             </nuxt-link>
             <nuxt-link to="/books" exact>
-                <a style="margin-top: 15px;" class="button red" @click="deleteContent(book)">
+                <button style="margin-top: 15px;" class="button red" @click="deleteContent(book)" :disabled="!userOn">
                     Delete
-                </a>
+                </button>
             </nuxt-link>
         </div>
         <div v-else class="book_content short">
@@ -37,6 +37,11 @@ import ApiService from '../apiService';
 let apiService = new ApiService();
 
 export default {
+    data() {
+        return {
+            userOn: this.$store.state.currentUser._id
+        }
+    },
     props: {
         book: Object
     },
@@ -66,8 +71,12 @@ export default {
             await apiService.deleteBook(book);
 
             this.$store.commit('delete', book);
+            this.$store.commit('deleteBookFromUser', book);
         }
     },
+    created() {
+        console.log(this.$store.state.currentUser);
+    }
 }
 </script>
 
