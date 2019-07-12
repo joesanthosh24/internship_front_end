@@ -68,4 +68,14 @@ html {
 .red:hover {
   background-color: rgba(190, 8, 8, 0.959);
 }
+
+.blue {
+  border: 1px solid rgba(22, 36, 49, 0.959);
+  color: rgb(30, 86, 170);
+  margin-left: 15px;
+}
+
+.blue:hover {
+  background-color: rgba(22, 36, 49, 0.959);
+}
 </style>

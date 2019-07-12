@@ -2,7 +2,8 @@ export const state = () => ({
     books: [],
     count: 0,
     userLoggedIn: false,
-    currentUser: {}
+    currentUser: {},
+    comments: []
 });
 
 export const mutations = {
@@ -107,5 +108,8 @@ export const mutations = {
                 return;
             }
         }
+    },
+    addComment(state, comment) {
+        state.comments.push(comment);
     }
 }

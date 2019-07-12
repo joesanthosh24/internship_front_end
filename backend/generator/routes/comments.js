@@ -11,10 +11,10 @@ Router.get('/', function(req, res, next) {
     });
 });
 
-Router.get('/:bookId', function(req, res, next) {
-    let bookId = req.params.bookId;
+Router.get('/:bookTitle', function(req, res, next) {
+    let bookTitle = req.params.bookId;
 
-    Comment.find({ book: bookId }, function(err, comments) {
+    Comment.find({ book: bookTitle }, function(err, comments) {
         if(err) {
             return res.json(err);
         }
@@ -35,14 +35,14 @@ Router.get('/:userId', function(req, res, next) {
     })
 });
 
-Router.post('/:bookId/:userId/addComment', function(req, res, next) {
-    let bookId = req.params.bookId;
+Router.post('/:bookTitle/:userId/addComment', function(req, res, next) {
+    let bookTitle = req.params.bookTitle;
     let userId = req.params.userId;
 
     let comment = new Comment(
         {
             commentText: req.body.text,
-            book: bookId,
+            book: bookTitle,
             user: userId
         }
     );
@@ -56,3 +56,5 @@ Router.post('/:bookId/:userId/addComment', function(req, res, next) {
         }
     });
 });
+
+module.exports = Router;

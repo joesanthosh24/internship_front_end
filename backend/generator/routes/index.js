@@ -51,7 +51,7 @@ router.post("/books/addBook", function(req, res, next) {
 
 router.get("/books/:title", function(req, res, next) {
   console.log(req.params.title)
-  Book.find({title: req.params.title}, function(err, data) {
+  Book.findOne({title: req.params.title}, function(err, data) {
     if(err) {
       console.log(err);
     }

@@ -17,6 +17,9 @@
                     Delete
                 </button>
             </nuxt-link>
+            <button class="button blue" @click="goToComments(book)">
+                Comments
+            </button>
         </div>
         <div v-else class="book_content short">
             <img :src="book.img_src" alt="">
@@ -72,6 +75,9 @@ export default {
 
             this.$store.commit('delete', book);
             this.$store.commit('deleteBookFromUser', book);
+        },
+        goToComments(book) {
+            this.$router.push(`/comments/${book.title}`);
         }
     },
     created() {

@@ -57,5 +57,19 @@ export default class ApiService {
         return axios.get(`${API_URL}/users/logOut`, userInfo)
         .then( response => response.data )
         .catch( err => err );
-    }
+    };
+
+    getComments() {
+        console.log('get comments in Axios');
+        return axios.get(`${API_URL}/comments`)
+        .then( response => response.data )
+        .catch( err => err );
+    };
+
+    getCommentsByBookId(title) {
+        console.log('get comments by book id in Axios');
+        return axios.get(`${API_URL}/comments/${title}`)
+        .then( response => response.data )
+        .catch( err => err );
+    };
 }
