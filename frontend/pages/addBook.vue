@@ -15,9 +15,12 @@
                 <input type="text" class="book_input" id="image" v-model="image_url">
             <!-- </div> -->
             <div class="book_link">
-                <nuxt-link to="/books">
-                    <button type="submit" class="button green" @click="addBook">Add</button>
-                </nuxt-link>
+                <!-- <nuxt-link to="/books"> -->
+                    <button type="submit" class="button green" @click.prevent="addBook">Add</button>
+                <!-- </nuxt-link> -->
+            </div>
+            <div id="message">
+
             </div>
         </form>
     </div>
@@ -41,6 +44,16 @@
         methods: {
             async addBook(event) {
                 // Adding Book to MongoDB Database
+                let books = await apiService.getBooks();
+                console.log(books);
+
+                for(let i=0; i<books.length; i++) {
+                    console.log(books[i].title);
+                    if(books[i].title == this.title) {
+                        document.getElementById('message').innerText = "Book Exisits";
+                        return;
+                    }
+                }
                 
                 await apiService.createBook(
                     { 
@@ -55,7 +68,9 @@
                         }
                     }
                 ).then(res => {
-                    console.log(res);
+                    this.$router.push("/books");
+                }).catch(err => {
+                    console.log(err);
                 });
             },
             async getBook(title){

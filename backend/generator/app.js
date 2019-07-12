@@ -10,6 +10,7 @@ let passport = require('passport');
 let session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+let commentsRouter = require('./routes/comments');
 
 var app = express();
 let db = require('./databases/database');
@@ -80,6 +81,7 @@ passport.use(new LocalStrategy(
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/comments', commentsRouter);
 
 app.use(require('cors')());
 
