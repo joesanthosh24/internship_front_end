@@ -12,12 +12,13 @@ Router.get('/', function(req, res, next) {
 });
 
 Router.get('/:bookTitle', function(req, res, next) {
-    let bookTitle = req.params.bookId;
+    let bookTitle = req.params.bookTitle;
 
-    Comment.find({ book: bookTitle }, function(err, comments) {
+    Comment.find({ bookTitle: bookTitle }, function(err, comments) {
         if(err) {
             return res.json(err);
         }
+
         
         return res.json(comments);
     });
@@ -39,10 +40,12 @@ Router.post('/:bookTitle/:userId/addComment', function(req, res, next) {
     let bookTitle = req.params.bookTitle;
     let userId = req.params.userId;
 
+    console.log(req.body);
+
     let comment = new Comment(
         {
-            commentText: req.body.text,
-            book: bookTitle,
+            commentText: req.body.commentInfo.commentText,
+            bookTitle: bookTitle,
             user: userId
         }
     );

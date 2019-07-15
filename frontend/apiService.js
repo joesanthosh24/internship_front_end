@@ -72,4 +72,15 @@ export default class ApiService {
         .then( response => response.data )
         .catch( err => err );
     };
+
+    addComment(comment) {
+        console.log('add comment in Axios');
+
+        console.log(comment.commentInfo.book);
+        console.log(comment.commentInfo);
+
+        return axios.post(`${API_URL}/comments/${comment.commentInfo.book}/${comment.commentInfo.user}/addComment`, comment)
+        .then( response => response.data )
+        .catch( err => err );
+    }
 }

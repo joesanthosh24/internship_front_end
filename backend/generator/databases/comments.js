@@ -6,7 +6,7 @@ let commentSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    bookTItle: String
+    bookTitle: String
 });
 
 module.exports = mongoose.model('Comments', commentSchema);

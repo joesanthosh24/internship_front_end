@@ -111,5 +111,8 @@ export const mutations = {
     },
     addComment(state, comment) {
         state.comments.push(comment);
+    },
+    deleteComments(state) {
+        state.comments = [];
     }
 }
