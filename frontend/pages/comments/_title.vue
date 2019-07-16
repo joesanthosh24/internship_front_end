@@ -4,7 +4,6 @@
         <ul v-if="filteredComments" style="list-style-type: none;">
             <li v-for="comment in filteredComments" :key="comment._id">
                 <h3>{{ comment.commentText }}</h3>
-                <p>Written by {{ $store.state.currentUser.username }}</p>
             </li>
         </ul>
         <button id="comment_add_button" style=" margin-left: 25px; height: 40px;" v-show="this.displayed"  class="button green" @click="goToAdd">
@@ -54,7 +53,6 @@ export default {
             this.displayed = !this.displayed;
         },
         async sendComment() {
-
             let comment = this.comment;
             console.log(document.getElementById('comment_input').innerText);
             let data = await apiService.addComment({
@@ -73,7 +71,7 @@ export default {
         },
         goHome() {
             this.$router.push('/');
-        }
+        },
     }
 }
 </script>

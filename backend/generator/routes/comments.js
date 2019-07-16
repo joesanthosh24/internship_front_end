@@ -1,4 +1,5 @@
 let Comment = require('../databases/comments');
+let User = require('../databases/users');
 let Router = require('express').Router();
 
 Router.get('/', function(req, res, next) {

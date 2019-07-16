@@ -82,5 +82,5 @@ export default class ApiService {
         return axios.post(`${API_URL}/comments/${comment.commentInfo.book}/${comment.commentInfo.user}/addComment`, comment)
         .then( response => response.data )
         .catch( err => err );
-    }
+    };
 }
