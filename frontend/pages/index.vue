@@ -9,10 +9,6 @@
         Check Out Your Favourite Books
       </h2>
       <main-links></main-links>
-      <form style="margin-top: 30px;" action="">
-        <input type="text" style="height: 35px;">
-        <input type="submit" value="Search" class="button green">
-      </form>
     </div>
   </div>
 </template>
