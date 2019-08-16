@@ -13,11 +13,10 @@
             <input type="button" value="Log In" class="button green" style="margin-top: 10px;" @click="login">
         </form>
         <div style="padding-left: 0; display: flex; justify-content: space-between;">
-            <nuxt-link to="/">
-                <a class="button red">
+            
+                <a class="button red" @click="$router.go(-1)">
                     Go Back
                 </a>
-            </nuxt-link>
             <nuxt-link to="/contact">
                 <a class="button grey" style="margin-right: 15px;">
                     Contact
@@ -70,7 +69,7 @@ export default {
             console.log(resp);
         },
         goBack() {
-            this.$router.push('/');
+            this.$router.go(-1);
         },
         gotToContacts() {
             this.$router.push('/contacts');

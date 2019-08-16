@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="$store.state.currentUser.username">
         <nav>
             <ul>
                 <li>
@@ -47,6 +47,11 @@
         <div class="list_row">
             <book-content v-for="book in filteredBooks" :key="book._id" :book="book"></book-content>
         </div>
+    </div>
+    <div v-else>
+        <h1>Please Login or Sign Up in order to access the books</h1>
+        <button class="button blue" @click="$router.push('/auth/login')">Login</button>
+        <button class="button green" @click="$router.push('/auth/signUp')">Sign Up</button>
     </div>
 </template>
 

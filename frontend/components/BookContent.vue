@@ -17,9 +17,6 @@
                     Delete
                 </button>
             </nuxt-link>
-            <button class="button blue" @click="goToComments(book)">
-                Comments
-            </button>
         </div>
         <div v-else class="book_content short">
             <img :src="book.img_src" alt="">

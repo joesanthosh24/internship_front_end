@@ -40,8 +40,9 @@ export default {
         // this.book = promisedObj[0];
 
         // this.book = this.$store.commit('getBookByTitle', this.$route.params.title);
-        let books = await apiService.getBookByTitle(this.$route.params.title);
-        this.book = books[0];
+        let book = await apiService.getBookByTitle(this.$route.params.title);
+        this.book = book;
+        
         console.log(this.book);
 
         this.$store.commit('add', this.book);
@@ -55,7 +56,6 @@ export default {
             // let genreVal = document.getElementById('genre_2').value;
             // let ratingVal = document.getElementById('rating_2').value;
             // let imgSrcVal = document.getElementById('image_2').value;
-
             let ratingVal = document.getElementById('rating_2').value;
 
             console.log(ratingVal);
